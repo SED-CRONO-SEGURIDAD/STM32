@@ -92,8 +92,8 @@ void dist_Ultrasonidos(void);
   PD13--TRIG
   PA6--ECHO
 
-  PD0-PD3 OUTPUT CONTRASEÑA
-
+  PD0-PD3 OUTPUT PAD
+  PD4-PD7 INPUT PAD
 
 */
 
@@ -131,10 +131,6 @@ Keypad_WiresTypeDef keypadStruct;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
-	//char *introducido[3] ;
-	//char input=0;
-
 
   /* USER CODE END 1 */
 
@@ -227,73 +223,7 @@ int main(void)
 		  ssd1306_WriteString("INTRODUZCA", Font_11x18, 1);
 		  ssd1306_SetCursor( 12, 20 );
 		  ssd1306_WriteString("CODIGO", Font_11x18, 1);
-		  ssd1306_UpdateScreen(&hi2c1);
-
-//////////////////////////////////////////////////////////////////////////////////////////
-		  //CONTRASEÑA
-		  /*do{
-		  		  input=keypad_read();
-		  		  if(input)
-		  		  {
-		  			  if(contrasena[i] != input)
-		  			  {
-		  			  //print error
-		  				ssd1306_Fill(0);          		// 0 NEGRO
-		  			  	ssd1306_SetCursor( 18, 10 );
-		  				ssd1306_WriteString("CODIGO", Font_11x18, 1);
-		  				ssd1306_SetCursor( 10, 30 );
-		  				ssd1306_WriteString("INCORRECTO", Font_11x18, 1);
-		  				ssd1306_UpdateScreen(&hi2c1);
-		  				i=0;
-		  			  }
-
-		  			  else if(contrasena[i] == input)
-		  			  {
-		  			  //continua
-		  				ssd1306_Fill(0);          		// 0 NEGRO
-		  				ssd1306_UpdateScreen(&hi2c1);
-		  			  i++;
-		  			  }
-		  			  //HAL_Delay(50);
-		  		  }
-		  	  }while(i<1);
-		  	contrasena_bit = 1;*/
-
-		  /*do{
-			  for(uint8_t j=0; j<3; j++)
-			  {
-				  Keypad4x4_ReadKeypad(botones_pad);
-
-				  for(uint8_t i=0; i<16; i++)
-				  {
-					  if(botones_pad[i])
-					  {
-			  			  ssd1306_SetCursor( 18, 40 );
-						  ssd1306_WriteString(Keypad4x4_GetChar(i), Font_11x18, 1);
-						  ssd1306_UpdateScreen(&hi2c1);
-						  introducido[j] = Keypad4x4_GetChar(i);
-					  }
-				  }
-				  HAL_Delay(100);
-			  }
-			  for(uint8_t k=0; k<3; k++)
-			  {
-				  if(introducido[k] == contrasena[k])
-			  	  {
-					  contrasena_bit = 1;
-			  	  }
-			  	  else
-			  	  {
-	  				  ssd1306_Fill(0);          		// 0 NEGRO
-	  			  	  ssd1306_SetCursor( 18, 10 );
-	  				  ssd1306_WriteString("CODIGO", Font_11x18, 1);
-	  				  ssd1306_SetCursor( 10, 30 );
-	  				  ssd1306_WriteString("INCORRECTO", Font_11x18, 1);
-	  				  ssd1306_UpdateScreen(&hi2c1);
-			  	  }
-			  }
-
-		  }while(contrasena_bit != 1);*/
+		  ssd1306_UpdateScreen(&hi2c1);		  	  
 
 		  do{
 			  Keypad4x4_ReadKeypad(botones_pad);
@@ -338,12 +268,7 @@ int main(void)
 		  	}while(i<4);
 		    contrasena_bit = 1;
 	  }
-////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-	  //HAL_GPIO_WritePin(GPIOD, GPIO_PIN_7, GPIO_PIN_RESET);
-	  //HAL_Delay(1000);
 	  if (contrasena_bit == 1 && puerta == 0)
 	  {
 		  ssd1306_Fill(0);          		// 0 NEGRO
